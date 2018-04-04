@@ -1,6 +1,7 @@
 type Message {
   id: ID! @unique
   content: String!
+  media: String!
   createdAt: DateTime!
   sendBy: User
   chat: Chat!

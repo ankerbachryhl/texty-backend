@@ -9,7 +9,8 @@ function createChat(parent, args, context, info) {
 }
 
 function createMessage(parent, args, context, info) {
-  const { content, chatId } = args;
+  const { content, media, chatId } = args;
+
   const userId = getUserId(context);
   return context.db.mutation.createMessage({
     data: { content, sendBy: { connect: { id: userId }}, chat: { connect: { id: chatId }} }}, info);
