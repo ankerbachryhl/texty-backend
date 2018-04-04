@@ -17,7 +17,7 @@ function createMessage(parent, args, context, info) {
 
   const userId = getUserId(context);
   return context.db.mutation.createMessage({
-    data: { content, sendBy: { connect: { id: userId }}, chat: { connect: { id: chatId }} }}, info);
+    data: { content, media, sendBy: { connect: { id: userId }}, chat: { connect: { id: chatId }} }}, info);
 }
 
 async function signup(parent, args, context, info) {
