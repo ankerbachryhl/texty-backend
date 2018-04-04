@@ -3,7 +3,7 @@ projects:
     schemaPath: "src/schema.graphql"
     extensions:
       endpoints:
-        default: "https://texty-prod-server.herokuapp.com/"
+        default: "https://localhost:4000"
   database:
     schemaPath: "src/generated/prisma.graphql"
     extensions:
