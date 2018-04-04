@@ -11,13 +11,16 @@ function createChat(parent, args, context, info) {
 function createMessage(parent, args, context, info) {
   const { content, media, chatId } = args;
 
+  if(content == '') {
+    throw new Error("You can't just send whitespace")
+  }
+
   const userId = getUserId(context);
   return context.db.mutation.createMessage({
     data: { content, sendBy: { connect: { id: userId }}, chat: { connect: { id: chatId }} }}, info);
 }
 
 async function signup(parent, args, context, info) {
-
   const emailExist = await context.db.query.user({
     where: { email: args.email }});
 
