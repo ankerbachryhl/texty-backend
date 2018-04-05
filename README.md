@@ -1,3 +1,3 @@
-##GraphQL server for texty
+## GraphQL server for texty
 
 Cool? Yes.
