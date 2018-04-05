@@ -2,7 +2,7 @@
 service: texty-app
 
 # the cluster and stage the service is deployed to
-stage: prod
+stage: dev
 
 # to disable authentication:
 # disableAuth: true
