@@ -4,7 +4,7 @@ function chatMessages(parent, args, ctx, info) {
 }
 
 function chats(parent, args, ctx, info) {
-  return ctx.db.query.chats(info)
+  return ctx.db.query.chats({ }, info)
 }
 
 module.exports = {

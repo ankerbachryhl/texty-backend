@@ -3,7 +3,7 @@ projects:
     schemaPath: "src/schema.graphql"
     extensions:
       endpoints:
-        default: "https://localhost:4000"
+        default: "https://eu1.prisma.sh/anker-bach-ryhl/texty-app/prod"
   database:
     schemaPath: "src/generated/prisma.graphql"
     extensions:
