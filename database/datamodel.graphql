@@ -7,6 +7,12 @@ type Message {
   chat: Chat!
 }
 
+type Like {
+  id: ID! @unique
+  user: User!
+  chat: Chat!
+}
+
 type User {
   id: ID! @unique
   name: String! @unique
@@ -20,4 +26,5 @@ type Chat {
   name: String! @unique
   createdAt: DateTime!
   messages: [Message!]!
+  likes: [Like!]!
 }

@@ -20,6 +20,28 @@ function createMessage(parent, args, context, info) {
     data: { content, media, sendBy: { connect: { id: userId }}, chat: { connect: { id: chatId }} }}, info);
 }
 
+async function createLike(parent, args, context, info) {
+  const { chatId } = args;
+  const userId = getUserId(context)
+
+  const likeExist = await context.db.exists.Like({
+    user: { id: userId },
+    chat: { id: chatId },
+  })
+
+  if (likeExist) {
+    throw new Error("You already liked this chat room")
+  }
+
+  return context.db.mutation.createLike(
+    {
+      data: {
+        user: { connect: { id: userId }},
+        chat: { connect: { id: chatId }},
+      }
+    }, info)
+}
+
 async function signup(parent, args, context, info) {
   const emailExist = await context.db.query.user({
     where: { email: args.email }});
@@ -70,4 +92,5 @@ module.exports = {
   createMessage,
   signup,
   login,
+  createLike,
 }

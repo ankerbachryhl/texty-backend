@@ -1,4 +1,4 @@
-# import Message, MessageSubscriptionPayload, Chat from "./generated/prisma.graphql"
+# import Message, Like, MessageSubscriptionPayload, Chat from "./generated/prisma.graphql"
 
 type Query {
   chats: [Chat!]!
@@ -8,6 +8,7 @@ type Query {
 type Mutation {
   createChat(name: String!): Chat!
   createMessage(content: String!, media: String, chatId: String!): Message!
+  createLike(chatId: String!): Like
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 }
