@@ -27,4 +27,5 @@ type Chat {
   createdAt: DateTime!
   messages: [Message!]!
   likes: [Like!]!
+  likeCount: Int!
 }

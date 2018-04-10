@@ -11,6 +11,7 @@ type Chat implements Node {
   createdAt: DateTime!
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
   likes(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Like!]
+  likeCount: Int!
 }
 
 type Like implements Node {
@@ -81,6 +82,7 @@ type ChatConnection {
 
 input ChatCreateInput {
   name: String!
+  likeCount: Int!
   messages: MessageCreateManyWithoutChatInput
   likes: LikeCreateManyWithoutChatInput
 }
@@ -97,11 +99,13 @@ input ChatCreateOneWithoutMessagesInput {
 
 input ChatCreateWithoutLikesInput {
   name: String!
+  likeCount: Int!
   messages: MessageCreateManyWithoutChatInput
 }
 
 input ChatCreateWithoutMessagesInput {
   name: String!
+  likeCount: Int!
   likes: LikeCreateManyWithoutChatInput
 }
 
@@ -126,6 +130,8 @@ enum ChatOrderByInput {
   name_DESC
   createdAt_ASC
   createdAt_DESC
+  likeCount_ASC
+  likeCount_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -134,6 +140,7 @@ type ChatPreviousValues {
   id: ID!
   name: String!
   createdAt: DateTime!
+  likeCount: Int!
 }
 
 type ChatSubscriptionPayload {
@@ -173,6 +180,7 @@ input ChatSubscriptionWhereInput {
 
 input ChatUpdateInput {
   name: String
+  likeCount: Int
   messages: MessageUpdateManyWithoutChatInput
   likes: LikeUpdateManyWithoutChatInput
 }
@@ -195,11 +203,13 @@ input ChatUpdateOneWithoutMessagesInput {
 
 input ChatUpdateWithoutLikesDataInput {
   name: String
+  likeCount: Int
   messages: MessageUpdateManyWithoutChatInput
 }
 
 input ChatUpdateWithoutMessagesDataInput {
   name: String
+  likeCount: Int
   likes: LikeUpdateManyWithoutChatInput
 }
 
@@ -357,6 +367,35 @@ input ChatWhereInput {
   All values greater than or equal the given value.
   """
   createdAt_gte: DateTime
+  likeCount: Int
+  """
+  All values that are not equal to given value.
+  """
+  likeCount_not: Int
+  """
+  All values that are contained in given list.
+  """
+  likeCount_in: [Int!]
+  """
+  All values that are not contained in given list.
+  """
+  likeCount_not_in: [Int!]
+  """
+  All values less than the given value.
+  """
+  likeCount_lt: Int
+  """
+  All values less than or equal the given value.
+  """
+  likeCount_lte: Int
+  """
+  All values greater than the given value.
+  """
+  likeCount_gt: Int
+  """
+  All values greater than or equal the given value.
+  """
+  likeCount_gte: Int
   messages_every: MessageWhereInput
   messages_some: MessageWhereInput
   messages_none: MessageWhereInput

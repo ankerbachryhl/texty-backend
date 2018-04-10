@@ -5,7 +5,7 @@ const { APP_SECRET, getUserId } = require('../utils');
 function createChat(parent, args, context, info) {
   const { name } = args;
   return context.db.mutation.createChat({
-    data: { name }}, info)
+    data: { name, likeCount: 0 }}, info)
 }
 
 function createMessage(parent, args, context, info) {
@@ -20,9 +20,12 @@ function createMessage(parent, args, context, info) {
     data: { content, media, sendBy: { connect: { id: userId }}, chat: { connect: { id: chatId }} }}, info);
 }
 
-async function createLike(parent, args, context, info) {
+async function likeChat(parent, args, context, info) {
   const { chatId } = args;
   const userId = getUserId(context)
+
+
+  //Check if the user has liked before
 
   const likeExist = await context.db.exists.Like({
     user: { id: userId },
@@ -32,6 +35,23 @@ async function createLike(parent, args, context, info) {
   if (likeExist) {
     throw new Error("You already liked this chat room")
   }
+
+  //Query chat to get current like count
+
+  const chat = await context.db.query.chats({ where: { id: chatId }})
+
+  //Update chat with new total likes
+
+  await context.db.mutation.updateChat({
+    data: {
+      likeCount: chat[0].likeCount + 1
+    },
+    where: {
+      id: chatId
+    }
+  })
+
+  //At last make new like type so the user cant like the same chat again
 
   return context.db.mutation.createLike(
     {
@@ -92,5 +112,5 @@ module.exports = {
   createMessage,
   signup,
   login,
-  createLike,
+  likeChat,
 }

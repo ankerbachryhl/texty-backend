@@ -8,7 +8,7 @@ type Query {
 type Mutation {
   createChat(name: String!): Chat!
   createMessage(content: String!, media: String, chatId: String!): Message!
-  createLike(chatId: String!): Like
+  likeChat(chatId: String!): Like!
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 }
