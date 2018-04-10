@@ -1,7 +1,7 @@
-# import Message, Like, MessageSubscriptionPayload, Chat from "./generated/prisma.graphql"
+# import Message, Like, MessageSubscriptionPayload, ChatOrderByInput Chat from "./generated/prisma.graphql"
 
 type Query {
-  chats: [Chat!]!
+  chats(orderBy: ChatOrderByInput): [Chat!]!
   chatMessages(chatId: String!): [Message!]!
 }
 

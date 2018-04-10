@@ -4,7 +4,9 @@ function chatMessages(parent, args, ctx, info) {
 }
 
 function chats(parent, args, ctx, info) {
-  return ctx.db.query.chats({ }, info)
+  const { orderBy } = args
+
+  return ctx.db.query.chats({ orderBy }, info)
 }
 
 module.exports = {
